@@ -307,11 +307,10 @@
 
         // key
         meshes["key"] = models.key.mesh.clone();
-        meshes["key"].position.set(90, -50, -176);
+        meshes["key"].position.set(90, -50, -206);
         meshes["key"].rotation.set(Math.PI / 2, 0, 0);
         meshes["key"].scale.set(30, 30, 30);
         setChildrenName(meshes["key"], "key");
-        meshes["key"].visible = false;
 
         // door
         meshes["door"] = models.door.mesh.clone();
@@ -501,13 +500,13 @@
           if (eventObj.position.z == 30) {
             eventObj.position.z = 0;
             if (eventObj == meshes["woodenCabinet"].children[2])
-              meshes["key"].visible = false;
+              meshes["key"].position.z = -206;
             return;
           } else {
             popupText.innerText = getSubtitle("openWoodenCabinet");
             eventObj.position.z = 30;
             if (eventObj == meshes["woodenCabinet"].children[2])
-              meshes["key"].visible = true;
+              meshes["key"].position.z = -176;
           }
         } else if (eventObj.name == "key") {
           if (player.hasKey) {
