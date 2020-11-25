@@ -33,7 +33,7 @@ let player = {
 
 let setting = {
   korean: true,
-  blockVisible: true,
+  blockVisible: false,
   blockWireframe: false,
 };
 
