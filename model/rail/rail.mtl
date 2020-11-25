@@ -1,0 +1,38 @@
+# 3ds Max Wavefront OBJ Exporter v0.94b - (c)2007 guruware
+# File Created: 28.08.2015 13:44:29
+
+newmtl keper
+	Ns 96.078431
+	Ka 1.000000 1.000000 1.000000
+	Kd 0.640000 0.640000 0.640000
+	Ks 0.500000 0.500000 0.500000
+	Ke 0.000000 0.000000 0.000000
+	Ni 1.000000
+	d 1.000000
+	illum 2
+	map_Ka Truck_1524_kreper.jpg
+	map_Kd Truck_1524_kreper.jpg
+
+newmtl Reils
+	Ns 96.078431
+	Ka 1.000000 1.000000 1.000000
+	Kd 0.640000 0.640000 0.640000
+	Ks 0.500000 0.500000 0.500000
+	Ke 0.000000 0.000000 0.000000
+	Ni 1.000000
+	d 1.000000
+	illum 2
+	map_Ka Truck_1524_reils.jpg
+	map_Kd Truck_1524_reils.jpg
+
+newmtl Sleppers
+	Ns 96.078431
+	Ka 1.000000 1.000000 1.000000
+	Kd 0.640000 0.640000 0.640000
+	Ks 0.500000 0.500000 0.500000
+	Ke 0.000000 0.000000 0.000000
+	Ni 1.000000
+	d 1.000000
+	illum 2
+	map_Ka Truck_1524_sleppers.jpg
+	map_Kd Truck_1524_sleppers.jpg

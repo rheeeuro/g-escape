@@ -1,0 +1,88 @@
+#blocker {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#instructions {
+  width: 100%;
+  height: 100%;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  box-orient: horizontal;
+
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  box-pack: center;
+
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  box-align: center;
+
+  color: #ffffff;
+  text-align: center;
+  font-family: Arial;
+  font-size: 14px;
+  line-height: 24px;
+
+  cursor: pointer;
+}
+
+.popup {
+  width: 50%;
+  height: 50%;
+  background-color: rgba(255, 255, 255, 0.27);
+  border-radius: 5px;
+  position: absolute;
+  bottom: 25%;
+  left: 25%;
+  padding: 5px 20px 5px 20px;
+  -moz-box-shadow: 3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow: 1px 3px 1px 1px rgba(0, 0, 0, 0.17);
+  z-index: 1109;
+  border: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+.popupText {
+  position: relative;
+  float: left;
+  top: 50%;
+  left: 50%;
+  font-size: 30px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 300%;
+}
+
+.crosshairWrapper {
+  position: absolute;
+  bottom: 49.55%;
+  left: 49.75%;
+  height: 0.9%;
+  width: 0.5%;
+}
+
+.crosshairOne {
+  position: absolute;
+  margin: auto;
+  bottom: 35%;
+  width: 100%;
+  height: 30%;
+  background-color: rgba(0, 255, 0, 0.2);
+}
+
+.crosshairTwo {
+  position: absolute;
+  margin: auto;
+  left: 35%;
+  width: 30%;
+  height: 100%;
+  background-color: rgba(0, 255, 0, 0.2);
+}
