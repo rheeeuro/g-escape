@@ -11,6 +11,10 @@
   </head>
   <body>
     <div id="blocker">
+      <div id="loading">
+        <div id="jsLoadingBar" class="loadingBar"></div>
+        <div id="jsLoadingText" class="loadingText"></div>
+      </div>
       <div id="instructions">
         <span style="font-size: 36px">Click to play</span>
         <br /><br />
@@ -68,6 +72,11 @@
       } from "./js/models.js";
 
       const body = document.querySelector("body");
+      const blocker = document.getElementById("blocker");
+      const instructions = document.getElementById("instructions");
+      const loading = document.getElementById("loading");
+      const loadingBar = document.getElementById("jsLoadingBar");
+      const loadingText = document.getElementById("jsLoadingText");
       const popup = document.getElementById("jsPopup");
       const popupText = document.getElementById("jsPopupText");
       const crosshair = document.getElementById("jsCrosshair");
@@ -114,10 +123,24 @@
         loadingManager = new THREE.LoadingManager();
         loadingManager.onProgress = function (item, loaded, total) {
           console.log(item, loaded, total);
+          const percentText =
+            Math.floor((loaded / total).toFixed(2) * 100) + "%";
+          console.log(percentText);
+          loadingBar.style.width = percentText;
+          loadingText.innerText =
+            percentText + "  ( " + loaded + " / " + total + " )";
         };
         loadingManager.onLoad = function () {
           console.log("loaded all resources");
           RESOURCES_LOADED = true;
+          loading.style.display = "none";
+          instructions.addEventListener(
+            "click",
+            function () {
+              controls.lock();
+            },
+            false
+          );
           onResourcesLoaded();
         };
 
@@ -165,17 +188,6 @@
         for (let i = 0; i < blockPositions.length; i++) {}
 
         controls = new PointerLockControls(camera, document.body);
-
-        const blocker = document.getElementById("blocker");
-        const instructions = document.getElementById("instructions");
-
-        instructions.addEventListener(
-          "click",
-          function () {
-            controls.lock();
-          },
-          false
-        );
 
         controls.addEventListener("lock", function () {
           instructions.style.display = "none";

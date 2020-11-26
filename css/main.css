@@ -86,3 +86,31 @@
   height: 100%;
   background-color: rgba(0, 255, 0, 0.2);
 }
+
+#loading {
+  position: absolute;
+  bottom: 35%;
+  left: 42%;
+  height: 3%;
+  width: 16%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.loadingBar {
+  position: absolute;
+  left: 0%;
+  width: 0%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.loadingText {
+  position: absolute;
+  text-align: center;
+  height: 80%;
+  bottom: 10%;
+  width: 100%;
+  color: crimson;
+  font-weight: 800;
+  font-size: 0.8vw;
+}
