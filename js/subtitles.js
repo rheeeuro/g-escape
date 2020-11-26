@@ -33,7 +33,7 @@ const subtitlesKOR = {
   cupboard: "크고 낡은 책장이다. \n이상한 점은 없는 것 같다.",
   seeCupboard:
     "크고 낡은 책장이다. \n근데 이상할 정도로 아무 것도 채워지지 않았다. \n최근에 이곳으로 옮긴 것 같이...",
-  cupboardMove: "책장이 움직이기 시작했다!",
+  cupboardMove: "책장이 밀자 숨겨진 방이 나타났다!",
   barrier: "도로용 장애물이다. \n왜 여기있는지는 모르겠다.",
 };
 

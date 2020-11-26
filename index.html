@@ -125,7 +125,6 @@
           console.log(item, loaded, total);
           const percentText =
             Math.floor((loaded / total).toFixed(2) * 100) + "%";
-          console.log(percentText);
           loadingBar.style.width = percentText;
           loadingText.innerText =
             percentText + "  ( " + loaded + " / " + total + " )";
