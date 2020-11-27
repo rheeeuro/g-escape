@@ -82,6 +82,7 @@
       const crosshair = document.getElementById("jsCrosshair");
 
       let camera, scene, renderer, controls;
+      let spotLight;
       let composer, effectFXAA, outlinePass;
       let mesh, ambientLight, light;
       const objects = [];
@@ -165,9 +166,23 @@
           })(_key);
         }
 
-        const light = new THREE.HemisphereLight(0xeeeeff, 0x777788, 0.75);
+        const light = new THREE.HemisphereLight(
+          0xeeeeff,
+          0x777788,
+          setting.spotlight ? 0.25 : 0.75
+        );
         light.position.set(0.5, 1, 0.75);
         scene.add(light);
+
+        spotLight = new THREE.SpotLight(0xffffff, 0.8, 0, Math.PI / 4, 0.5, 1);
+        camera.add(spotLight.target);
+        spotLight.target.position.set(0, 0, -1);
+        spotLight.position.copy(camera.position);
+
+        if (setting.spotlight) {
+          scene.add(spotLight);
+          console.log(spotLight);
+        }
 
         for (let i = 0; i < blockPositions.length; i++) {
           blocks.push(
@@ -493,6 +508,11 @@
         }
         checkIntersection();
         fixPosition(camera);
+
+        if (setting.spotlight) {
+          spotLight.target.position.set(0, 0, -1);
+          spotLight.position.copy(camera.position);
+        }
         renderer.render(scene, camera);
         composer.render();
       }

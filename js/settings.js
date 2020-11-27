@@ -32,9 +32,10 @@ let player = {
 };
 
 let setting = {
-  korean: true,
+  korean: false,
   blockVisible: false,
   blockWireframe: false,
+  spotlight: true,
 };
 
 function setChildrenName(obj, name) {
