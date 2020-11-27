@@ -36,6 +36,7 @@ let setting = {
   blockVisible: false,
   blockWireframe: false,
   spotlight: true,
+  vr: true,
 };
 
 function setChildrenName(obj, name) {

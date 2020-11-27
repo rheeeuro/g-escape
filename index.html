@@ -30,6 +30,7 @@
       <div class="crosshairOne"></div>
       <div class="crosshairTwo"></div>
     </div>
+    <canvas id="c"></canvas>
 
     <script type="module">
       import * as THREE from "./js/threejs/three.module.js";
@@ -43,6 +44,9 @@
       import { ShaderPass } from "./js/threejs/postprocessing/ShaderPass.js";
       import { OutlinePass } from "./js/threejs/postprocessing/OutlinePass.js";
       import { FXAAShader } from "./js/threejs/shaders/FXAAShader.js";
+
+      import { VRButton } from "./js/threejs/webxr/VRButton.js";
+      import { XRControllerModelFactory } from "./js/threejs/webxr/XRControllerModelFactory.js";
 
       import {
         loadingScreen,
@@ -100,9 +104,10 @@
       let eventObj = null;
 
       init();
-      animate();
 
       function init() {
+        const canvas = document.querySelector("#c");
+
         camera = new THREE.PerspectiveCamera(
           75,
           window.innerWidth / window.innerHeight,
@@ -227,9 +232,12 @@
           70
         );
 
-        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+        renderer.xr.enabled = setting.vr;
+        document.body.appendChild(VRButton.createButton(renderer));
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(window.innerWidth, window.innerHeight);
+
         document.body.appendChild(renderer.domElement);
 
         // postprocessing
@@ -263,6 +271,12 @@
         composer.addPass(effectFXAA);
 
         window.addEventListener("resize", onWindowResize, false);
+
+        if (setting.vr) {
+          renderer.setAnimationLoop(animate);
+        } else {
+          animate();
+        }
       }
 
       function checkIntersection() {
@@ -415,7 +429,7 @@
 
       function animate() {
         if (RESOURCES_LOADED == false) {
-          requestAnimationFrame(animate);
+          if (!setting.vr) requestAnimationFrame(animate);
 
           loadingScreen.box.position.x -= 0.05;
           if (loadingScreen.box.position.x < -10)
@@ -426,7 +440,7 @@
           return;
         }
 
-        requestAnimationFrame(animate);
+        if (!setting.vr) requestAnimationFrame(animate);
         const time = performance.now();
 
         const previousPosition = camera.position.clone();
