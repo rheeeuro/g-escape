@@ -69,6 +69,22 @@
   width: 0.5%;
 }
 
+.crosshairWrapperVR1 {
+  position: absolute;
+  bottom: 49.55%;
+  left: 24.75%;
+  height: 0.9%;
+  width: 0.5%;
+}
+
+.crosshairWrapperVR2 {
+  position: absolute;
+  bottom: 49.55%;
+  left: 74.75%;
+  height: 0.9%;
+  width: 0.5%;
+}
+
 .crosshairOne {
   position: absolute;
   margin: auto;
