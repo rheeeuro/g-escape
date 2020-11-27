@@ -3,6 +3,7 @@ import * as THREE from "./threejs/three.module.js";
 const loadingScreen = {
   scene: new THREE.Scene(),
   camera: new THREE.PerspectiveCamera(90, 1280 / 720, 0.1, 100),
+  VRcamera: new THREE.PerspectiveCamera(90, 1280 / 720, 0.1, 100),
   box: new THREE.Mesh(
     new THREE.BoxGeometry(0.5, 0.5, 0.5),
     new THREE.MeshBasicMaterial({ color: 0x4444ff })
@@ -10,7 +11,7 @@ const loadingScreen = {
 };
 
 let player = {
-  height: 0,
+  height: 1.6,
   speed: 1000,
 
   moveForward: false,

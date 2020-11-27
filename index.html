@@ -139,6 +139,7 @@
 
         loadingScreen.box.position.set(0, 0, 5);
         loadingScreen.camera.lookAt(loadingScreen.box.position);
+        loadingScreen.camera.add(loadingScreen.VRcamera);
         loadingScreen.scene.add(loadingScreen.box);
 
         loadingManager = new THREE.LoadingManager();
@@ -456,20 +457,24 @@
       }
 
       function animate() {
+        if (vrButton.innerText == "ENTER VR") {
+          setting.vr = false;
+        } else {
+          setting.vr = true;
+        }
+
         if (RESOURCES_LOADED == false) {
           loadingScreen.box.position.x -= 0.05;
           if (loadingScreen.box.position.x < -10)
             loadingScreen.box.position.x = 10;
           loadingScreen.box.position.y = Math.sin(loadingScreen.box.position.x);
 
-          renderer.render(loadingScreen.scene, loadingScreen.camera);
+          if (!setting.vr) {
+            renderer.render(loadingScreen.scene, loadingScreen.camera);
+          } else {
+            renderer.render(loadingScreen.scene, loadingScreen.VRcamera);
+          }
           return;
-        }
-
-        if (vrButton.innerText == "ENTER VR") {
-          setting.vr = false;
-        } else {
-          setting.vr = true;
         }
 
         const time = performance.now();
