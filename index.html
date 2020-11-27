@@ -30,7 +30,6 @@
       <div class="crosshairOne"></div>
       <div class="crosshairTwo"></div>
     </div>
-    <canvas id="c"></canvas>
 
     <script type="module">
       import * as THREE from "./js/threejs/three.module.js";
@@ -46,7 +45,6 @@
       import { FXAAShader } from "./js/threejs/shaders/FXAAShader.js";
 
       import { VRButton } from "./js/threejs/webxr/VRButton.js";
-      import { XRControllerModelFactory } from "./js/threejs/webxr/XRControllerModelFactory.js";
 
       import {
         loadingScreen,
@@ -106,8 +104,6 @@
       init();
 
       function init() {
-        const canvas = document.querySelector("#c");
-
         camera = new THREE.PerspectiveCamera(
           75,
           window.innerWidth / window.innerHeight,
@@ -232,12 +228,11 @@
           70
         );
 
-        renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-        renderer.xr.enabled = setting.vr;
+        renderer = new THREE.WebGLRenderer({ antialias: true });
         document.body.appendChild(VRButton.createButton(renderer));
+        renderer.xr.enabled = true;
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(window.innerWidth, window.innerHeight);
-
         document.body.appendChild(renderer.domElement);
 
         // postprocessing
@@ -271,7 +266,6 @@
         composer.addPass(effectFXAA);
 
         window.addEventListener("resize", onWindowResize, false);
-
         if (setting.vr) {
           renderer.setAnimationLoop(animate);
         } else {
@@ -429,7 +423,9 @@
 
       function animate() {
         if (RESOURCES_LOADED == false) {
-          if (!setting.vr) requestAnimationFrame(animate);
+          if (!setting.vr) {
+            requestAnimationFrame(animate);
+          }
 
           loadingScreen.box.position.x -= 0.05;
           if (loadingScreen.box.position.x < -10)
@@ -440,7 +436,9 @@
           return;
         }
 
-        if (!setting.vr) requestAnimationFrame(animate);
+        if (!setting.vr) {
+          requestAnimationFrame(animate);
+        }
         const time = performance.now();
 
         const previousPosition = camera.position.clone();
