@@ -159,6 +159,10 @@
       let blocks = [];
       let eventObj = null;
 
+      window.onload = function () {
+        imagePreload("img/popupbg.png", "img/storyStartbg.png");
+      };
+
       korButton.addEventListener("click", function () {
         setting.korean = true;
         init();
@@ -167,6 +171,25 @@
         setting.korean = false;
         init();
       });
+
+      imagePreload = function () {
+        // variables
+        var image_cache_array = new Array(),
+          i = 0;
+
+        // termination condition
+        if (!document.images) {
+          return false;
+        }
+
+        for (key in arguments) {
+          image_cache_array[i] = new Image();
+          image_cache_array[i].src = arguments[key];
+          i++;
+        }
+
+        return i;
+      };
 
       function init() {
         storyStartText.innerHTML = getSubtitle("storyStart");
