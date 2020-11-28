@@ -160,19 +160,14 @@
       let eventObj = null;
 
       window.onload = function () {
-        imagePreload("img/popupbg.png", "img/storyStartbg.png");
+        preload(
+          "img/popupbg.png",
+          "img/storyStartbg.png",
+          "img/storyStartbg.png"
+        );
       };
 
-      korButton.addEventListener("click", function () {
-        setting.korean = true;
-        init();
-      });
-      engButton.addEventListener("click", function () {
-        setting.korean = false;
-        init();
-      });
-
-      imagePreload = function () {
+      function preload() {
         // variables
         var image_cache_array = new Array(),
           i = 0;
@@ -182,14 +177,23 @@
           return false;
         }
 
-        for (key in arguments) {
+        for (let key in arguments) {
           image_cache_array[i] = new Image();
           image_cache_array[i].src = arguments[key];
           i++;
         }
 
+        korButton.addEventListener("click", function () {
+          setting.korean = true;
+          init();
+        });
+        engButton.addEventListener("click", function () {
+          setting.korean = false;
+          init();
+        });
+
         return i;
-      };
+      }
 
       function init() {
         storyStartText.innerHTML = getSubtitle("storyStart");
@@ -550,6 +554,13 @@
       }
 
       function animate() {
+        if (player.doorOpen && camera.position.x > 333) {
+          storyEndText.innerHTML = getSubtitle("storyEnd");
+          storyEnd.style.display = "block";
+          storyEndText.style.display = "block";
+          return;
+        }
+
         if (vrButton.innerHTML == "ENTER VR") {
           setting.vr = false;
         } else {
