@@ -20,7 +20,23 @@
         <h5>Choose Language</h5>
         <button class="languageButton korButton" id="korButton">Korean</button>
         <button class="languageButton engButton" id="engButton">English</button>
+        <br /><br />
+        <input
+          type="checkbox"
+          id="developerMode"
+          name="developer"
+          value="yes"
+        />
+        Developer's mode
       </div>
+    </div>
+    <div class="story" id="jsStoryStart" style="display: none">
+      <div class="storyText" id="jsStoryStartText" style="display: none"></div>
+      <div class="storyStartBg"></div>
+    </div>
+    <div class="story" id="jsStoryEnd" style="display: none">
+      <div class="storyText" id="jsStoryEndText" style="display: none"></div>
+      <div class="storyEndBg"></div>
     </div>
     <div id="blocker">
       <div id="loading">
@@ -37,6 +53,14 @@
     <div class="popup" id="jsPopup" style="display: none">
       <div class="popupText" id="jsPopupText" style="display: none"></div>
       <div class="popupImg" id="jsPopupImg"></div>
+    </div>
+    <div class="popupVR1" id="jsPopupVR1" style="display: none">
+      <div class="popupTextVR1" id="jsPopupTextVR1" style="display: none"></div>
+      <div class="popupImgVR1" id="jsPopupImgVR1"></div>
+    </div>
+    <div class="popupVR2" id="jsPopupVR2" style="display: none">
+      <div class="popupTextVR2" id="jsPopupTextVR2" style="display: none"></div>
+      <div class="popupImgVR2" id="jsPopupImgVR2"></div>
     </div>
     <div class="crosshairWrapper" id="jsCrosshair" style="display: none">
       <div class="crosshairOne"></div>
@@ -97,6 +121,13 @@
       const language = document.getElementById("jsLanguage");
       const korButton = document.getElementById("korButton");
       const engButton = document.getElementById("engButton");
+      const developerMode = document.getElementById("developerMode");
+
+      const storyStart = document.getElementById("jsStoryStart");
+      const storyStartText = document.getElementById("jsStoryStartText");
+      const storyEnd = document.getElementById("jsStoryEnd");
+      const storyEndText = document.getElementById("jsStoryEndText");
+
       const blocker = document.getElementById("blocker");
       const instructions = document.getElementById("instructions");
       const loading = document.getElementById("loading");
@@ -138,6 +169,20 @@
       });
 
       function init() {
+        storyStartText.innerHTML = getSubtitle("storyStart");
+        storyStart.style.display = "block";
+        storyStartText.style.display = "block";
+        storyStart.addEventListener("click", function () {
+          player.storyStart = true;
+          storyStart.style.display = "none";
+          storyStartText.style.display = "none";
+          if (RESOURCES_LOADED) {
+            loading.style.display = "none";
+          }
+        });
+
+        setting.blockVisible = developerMode.checked;
+        setting.spotlight = !developerMode.checked;
         language.style.display = "none";
         camera = new THREE.PerspectiveCamera(
           75,
@@ -177,7 +222,9 @@
         loadingManager.onLoad = function () {
           console.log("loaded all resources");
           RESOURCES_LOADED = true;
-          loading.style.display = "none";
+          if (player.storyStart) {
+            loading.style.display = "none";
+          }
           instructions.addEventListener(
             "click",
             function () {
@@ -225,7 +272,6 @@
 
         if (setting.spotlight) {
           scene.add(spotLight);
-          console.log(spotLight);
         }
 
         for (let i = 0; i < blockPositions.length; i++) {
@@ -285,6 +331,9 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
+        renderer.shadowMap.enabled = setting.shadow;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
         // set crosshair
         ch.push(crosshair);
         vrButton.addEventListener("click", function () {
@@ -325,6 +374,7 @@
         );
         composer.addPass(effectFXAA);
         window.addEventListener("resize", onWindowResize, false);
+
         renderer.setAnimationLoop(animate);
       }
 
@@ -339,7 +389,7 @@
           intersects[0].object.name != "" &&
           intersects[0].object != meshes["metaldoor"].children[0]
         ) {
-          if (popup.style.display == "none") {
+          if (popup.style.display == "none" && setting.lock) {
             popupText.innerHTML = getSubtitle(intersects[0].object.name);
             eventObj = intersects[0].object;
             body.addEventListener("click", eventTrigger);

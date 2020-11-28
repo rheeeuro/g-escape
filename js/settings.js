@@ -11,6 +11,7 @@ const loadingScreen = {
 };
 
 let player = {
+  storyStart: false,
   height: 1.6,
   speed: 1000,
 
@@ -35,10 +36,11 @@ let player = {
 let setting = {
   korean: false,
   blockVisible: false,
-  blockWireframe: false,
+  blockWireframe: true,
   spotlight: true,
-  vr: true,
+  vr: false,
   lock: false,
+  shadow: true,
 };
 
 function setChildrenName(obj, name) {

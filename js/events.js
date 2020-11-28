@@ -1,4 +1,4 @@
-import { player } from "./settings.js";
+import { player, setting } from "./settings.js";
 
 let hiddenEvent = {
   t: 0,
@@ -10,8 +10,21 @@ let hiddenEvent = {
 
 function showPopup() {
   document.querySelector("body").removeEventListener("click", showPopup);
-  document.getElementById("jsPopup").style.display = "block";
-  document.getElementById("jsPopupText").style.display = "block";
+  if (setting.vr) {
+    document.getElementById(
+      "jsPopupTextVR1"
+    ).innerHTML = document.getElementById("jsPopupText").innerHTML;
+    document.getElementById(
+      "jsPopupTextVR2"
+    ).innerHTML = document.getElementById("jsPopupText").innerHTML;
+    document.getElementById("jsPopupVR1").style.display = "block";
+    document.getElementById("jsPopupTextVR1").style.display = "block";
+    document.getElementById("jsPopupVR2").style.display = "block";
+    document.getElementById("jsPopupTextVR2").style.display = "block";
+  } else {
+    document.getElementById("jsPopup").style.display = "block";
+    document.getElementById("jsPopupText").style.display = "block";
+  }
 
   document.querySelector("body").addEventListener("click", hidePopup);
 }
@@ -20,6 +33,10 @@ function hidePopup() {
   document.querySelector("body").removeEventListener("click", hidePopup);
   document.getElementById("jsPopup").style.display = "none";
   document.getElementById("jsPopupText").style.display = "none";
+  document.getElementById("jsPopupVR1").style.display = "none";
+  document.getElementById("jsPopupTextVR1").style.display = "none";
+  document.getElementById("jsPopupVR2").style.display = "none";
+  document.getElementById("jsPopupTextVR2").style.display = "none";
 }
 
 const onKeyDown = function (event) {
