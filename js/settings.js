@@ -35,6 +35,7 @@ let player = {
 
 let setting = {
   korean: false,
+  developerMode: false,
   blockVisible: false,
   blockWireframe: true,
   spotlight: true,
@@ -51,7 +52,7 @@ function setChildrenName(obj, name) {
 }
 
 function fixPosition(camera) {
-  if (player.doorOpen) return;
+  if (player.doorOpen || setting.developerMode) return;
   if (camera.position.x > 325) camera.position.x = 305;
   if (camera.position.x < -96) camera.position.x = -76;
   if (camera.position.z > 102) camera.position.z = 82;

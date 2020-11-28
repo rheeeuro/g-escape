@@ -207,9 +207,9 @@
             loading.style.display = "none";
           }
         });
-
-        setting.blockVisible = developerMode.checked;
-        setting.spotlight = !developerMode.checked;
+        setting.developerMode = developerMode.checked;
+        setting.blockVisible = setting.developerMode;
+        setting.spotlight = !setting.developerMode;
         language.style.display = "none";
         camera = new THREE.PerspectiveCamera(
           75,
@@ -629,30 +629,36 @@
           controls.moveRight(-player.velocity.x * delta);
           controls.moveForward(-player.velocity.z * delta);
 
-          for (let i = 0; i < blocks.length; i++) {
-            if (player.doorOpen && specialBlockIndex.door.includes(i)) {
-              continue;
-            } else if (
-              player.metaldoorOpen &&
-              specialBlockIndex.metaldoor.includes(i)
-            ) {
-              continue;
-            } else if (
-              player.moveCupboard &&
-              specialBlockIndex.cupboardBefore.includes(i)
-            ) {
-              continue;
-            } else if (
-              !player.moveCupboard &&
-              specialBlockIndex.cupboardAfter.includes(i)
-            ) {
-              continue;
-            } else if (
-              camera.position.distanceTo(
-                new THREE.Vector3(blocks[i].position.x, 0, blocks[i].position.z)
-              ) < 15
-            ) {
-              camera.position.copy(previousPosition);
+          if (!setting.developerMode) {
+            for (let i = 0; i < blocks.length; i++) {
+              if (player.doorOpen && specialBlockIndex.door.includes(i)) {
+                continue;
+              } else if (
+                player.metaldoorOpen &&
+                specialBlockIndex.metaldoor.includes(i)
+              ) {
+                continue;
+              } else if (
+                player.moveCupboard &&
+                specialBlockIndex.cupboardBefore.includes(i)
+              ) {
+                continue;
+              } else if (
+                !player.moveCupboard &&
+                specialBlockIndex.cupboardAfter.includes(i)
+              ) {
+                continue;
+              } else if (
+                camera.position.distanceTo(
+                  new THREE.Vector3(
+                    blocks[i].position.x,
+                    0,
+                    blocks[i].position.z
+                  )
+                ) < 15
+              ) {
+                camera.position.copy(previousPosition);
+              }
             }
           }
           if (!setting.lock) {
