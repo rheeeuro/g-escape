@@ -10,6 +10,18 @@
     <link type="text/css" rel="stylesheet" href="css/main.css" />
   </head>
   <body>
+    <div class="language" id="jsLanguage">
+      <div class="titleWrapper">
+        <h1 style="font-size: 5vw">G-ESCAPE</h1>
+        <h3 style="font-size: 1vw">
+          VR Room Escape Game with Three.js, Webgl, WebXR
+        </h3>
+        <br /><br />
+        <h5>Choose Language</h5>
+        <button class="languageButton korButton" id="korButton">Korean</button>
+        <button class="languageButton engButton" id="engButton">English</button>
+      </div>
+    </div>
     <div id="blocker">
       <div id="loading">
         <div id="jsLoadingBar" class="loadingBar"></div>
@@ -22,7 +34,6 @@
         Look: MOUSE
       </div>
     </div>
-
     <div class="popup" id="jsPopup" style="display: none">
       <div class="popupText" id="jsPopupText" style="display: none"></div>
       <div class="popupImg" id="jsPopupImg"></div>
@@ -83,6 +94,9 @@
       } from "./js/models.js";
 
       const body = document.querySelector("body");
+      const language = document.getElementById("jsLanguage");
+      const korButton = document.getElementById("korButton");
+      const engButton = document.getElementById("engButton");
       const blocker = document.getElementById("blocker");
       const instructions = document.getElementById("instructions");
       const loading = document.getElementById("loading");
@@ -114,9 +128,17 @@
       let blocks = [];
       let eventObj = null;
 
-      init();
+      korButton.addEventListener("click", function () {
+        setting.korean = true;
+        init();
+      });
+      engButton.addEventListener("click", function () {
+        setting.korean = false;
+        init();
+      });
 
       function init() {
+        language.style.display = "none";
         camera = new THREE.PerspectiveCamera(
           75,
           window.innerWidth / window.innerHeight,
