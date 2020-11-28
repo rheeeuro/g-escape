@@ -25,6 +25,7 @@
 
     <div class="popup" id="jsPopup" style="display: none">
       <div class="popupText" id="jsPopupText" style="display: none"></div>
+      <div class="popupImg" id="jsPopupImg"></div>
     </div>
     <div class="crosshairWrapper" id="jsCrosshair" style="display: none">
       <div class="crosshairOne"></div>
@@ -148,7 +149,7 @@
           const percentText =
             Math.floor((loaded / total).toFixed(2) * 100) + "%";
           loadingBar.style.width = percentText;
-          loadingText.innerText =
+          loadingText.innerHTML =
             percentText + "  ( " + loaded + " / " + total + " )";
         };
         loadingManager.onLoad = function () {
@@ -289,14 +290,11 @@
         composer.addPass(outlinePass);
 
         const textureLoader = new THREE.TextureLoader(loadingManager);
-        textureLoader.load(
-          "js/threejs/texture/tri_pattern.jpg",
-          function (texture) {
-            outlinePass.patternTexture = texture;
-            texture.wrapS = THREE.RepeatWrapping;
-            texture.wrapT = THREE.RepeatWrapping;
-          }
-        );
+        textureLoader.load("img/tri_pattern.jpg", function (texture) {
+          outlinePass.patternTexture = texture;
+          texture.wrapS = THREE.RepeatWrapping;
+          texture.wrapT = THREE.RepeatWrapping;
+        });
 
         effectFXAA = new ShaderPass(FXAAShader);
         effectFXAA.uniforms["resolution"].value.set(
@@ -320,7 +318,7 @@
           intersects[0].object != meshes["metaldoor"].children[0]
         ) {
           if (popup.style.display == "none") {
-            popupText.innerText = getSubtitle(intersects[0].object.name);
+            popupText.innerHTML = getSubtitle(intersects[0].object.name);
             eventObj = intersects[0].object;
             body.addEventListener("click", eventTrigger);
           }
@@ -457,7 +455,7 @@
       }
 
       function animate() {
-        if (vrButton.innerText == "ENTER VR") {
+        if (vrButton.innerHTML == "ENTER VR") {
           setting.vr = false;
         } else {
           setting.vr = true;
@@ -592,7 +590,7 @@
               meshes["key"].position.z = -206;
             return;
           } else {
-            popupText.innerText = getSubtitle("openWoodenCabinet");
+            popupText.innerHTML = getSubtitle("openWoodenCabinet");
             eventObj.position.z = 30;
             if (eventObj == meshes["woodenCabinet"].children[2])
               meshes["key"].position.z = -176;
@@ -606,7 +604,7 @@
           }
         } else if (eventObj.name == "door") {
           if (player.hasKey) {
-            popupText.innerText = getSubtitle("doorOpen");
+            popupText.innerHTML = getSubtitle("doorOpen");
             meshes["door"].position.set(293, -77, -110);
             meshes["door"].rotation.set(0, Math.PI / 6, 0);
             player.doorOpen = true;
@@ -614,7 +612,7 @@
             player.seeDoor = true;
           }
         } else if (eventObj.name == "metaldoor" && player.seeDoor) {
-          popupText.innerText = getSubtitle("metaldoorTwo");
+          popupText.innerHTML = getSubtitle("metaldoorTwo");
           if (meshes["metaldoor"].children[1].rotation.y == -4) {
             if (eventObj != meshes["metaldoor"].children[1]) {
               for (let i = 1; i <= 3; i++) {
@@ -622,7 +620,7 @@
                 meshes["metaldoor"].children[i].rotation.set(0, 0, 0);
               }
               player.metaldoorOpen = true;
-              popupText.innerText = getSubtitle("metaldoorOpen");
+              popupText.innerHTML = getSubtitle("metaldoorOpen");
             }
           } else {
             for (let i = 1; i <= 3; i++) {
@@ -635,7 +633,7 @@
         } else if (eventObj.name == "book") {
           if (player.seeCupboard) {
             player.readDiary = true;
-            popupText.innerText = getSubtitle("diary");
+            popupText.innerHTML = getSubtitle("diary");
           } else {
             player.seeDiary = true;
           }
@@ -643,13 +641,13 @@
           if (player.readDiary) {
             hiddenEvent.start = true;
             player.moveCupboard = true;
-            popupText.innerText = getSubtitle("cupboardMove");
+            popupText.innerHTML = getSubtitle("cupboardMove");
           } else if (player.seeDiary) {
             player.seeCupboard = true;
-            popupText.innerText = getSubtitle("seeCupboard");
+            popupText.innerHTML = getSubtitle("seeCupboard");
           }
         } else if (eventObj == meshes["corpse"].children[0]) {
-          popupText.innerText = getSubtitle("corpseWire");
+          popupText.innerHTML = getSubtitle("corpseWire");
         }
         showPopup();
       }
