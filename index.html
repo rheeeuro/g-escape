@@ -167,6 +167,7 @@
         );
       };
 
+      // preload images
       function preload() {
         // variables
         var image_cache_array = new Array(),
@@ -195,6 +196,7 @@
         return i;
       }
 
+      // scene setting
       function init() {
         storyStartText.innerHTML = getSubtitle("storyStart");
         storyStart.style.display = "block";
@@ -405,6 +407,7 @@
         renderer.setAnimationLoop(animate);
       }
 
+      // interaction with objects
       function checkIntersection() {
         body.removeEventListener("click", eventTrigger);
         raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
@@ -431,6 +434,7 @@
         }
       }
 
+      // set resource position, rotation
       function onResourcesLoaded() {
         // house
         meshes["house"] = models.house.mesh.clone();
@@ -692,6 +696,7 @@
         }
       }
 
+      // handle events
       function eventTrigger() {
         //console.log("click: " + eventObj.name + ", index: " + eventObj.parent.children.indexOf(eventObj));
         if (

@@ -1,5 +1,6 @@
 import * as THREE from "./threejs/three.module.js";
 
+// loading screen
 const loadingScreen = {
   scene: new THREE.Scene(),
   camera: new THREE.PerspectiveCamera(90, 1280 / 720, 0.1, 100),
@@ -10,6 +11,7 @@ const loadingScreen = {
   ),
 };
 
+// player status
 let player = {
   storyStart: false,
   height: 1.6,
@@ -23,6 +25,7 @@ let player = {
   velocity: new THREE.Vector3(),
   direction: new THREE.Vector3(),
 
+  // event status
   seeDoor: false,
   seeDiary: false,
   seeCupboard: false,
@@ -33,6 +36,7 @@ let player = {
   doorOpen: false,
 };
 
+// setting status
 let setting = {
   korean: false,
   developerMode: false,
@@ -44,6 +48,7 @@ let setting = {
   shadow: true,
 };
 
+// set object and children name
 function setChildrenName(obj, name) {
   obj.name = name;
   for (let i = 0; i < obj.children.length; i++) {
@@ -51,6 +56,7 @@ function setChildrenName(obj, name) {
   }
 }
 
+// fix position into room
 function fixPosition(camera) {
   if (player.doorOpen || setting.developerMode) return;
   if (camera.position.x > 325) camera.position.x = 305;

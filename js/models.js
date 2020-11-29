@@ -1,5 +1,6 @@
 import * as THREE from "./threejs/three.module.js";
 
+// model name
 const models = {
   house: {
     obj: "model/bg/HouseRender.obj",
@@ -68,6 +69,7 @@ const models = {
   },
 };
 
+// blocks position (wall, objects)
 const blockPositions = [
   // metaldoor
   new THREE.Vector3(50, -70, -48),
@@ -376,6 +378,7 @@ const blockPositions = [
   new THREE.Vector3(-93, -70, -48),
 ];
 
+// event object position
 const specialBlockIndex = {
   metaldoor: [0, 1, 2, 3, 4, 5],
   door: [6, 7, 8, 9, 10],

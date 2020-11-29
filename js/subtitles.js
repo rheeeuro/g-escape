@@ -1,5 +1,6 @@
 import { setting } from "./settings.js";
 
+// korean subtitles
 const subtitlesKOR = {
   storyStart:
     '"11월 23일, 오늘 방송 컨텐츠는 흉가 체험하러 가겠습니다!"<br><br>나는 인터넷 방송 비제이이다.<br><br>지난 주 운동으로 뒷산을 오르던 나는 길을 잘못 들었다가 한 건물을 발견했다.<br><br>그래서 궁금하기도 하고 방송 컨텐츠로 가보기로 했다.<br><br>"저는 지금 △△산 깊숙한 곳에 있는 한 흉가에 도착했습니다!"<br><br>"기분탓인지는 모르겠지만 인기척이 있는것 같아요."<br><br>채팅창에서는 헛소리하지 말라고 했지만 진짜 누군가 나를 지켜보고 있는 기분이었다.<br><br>"자 그럼 이제 들어가보겠.. "<br><br>"퍽!"<br><br>누군가 뒤에서 내 머리를 가격했다...<br><br>눈을 떠보니 그 흉가 안에 쓰러져 있었다.<br><br><span class="tip">(게임을 시작하려면 클릭해주세요.)</span>',
@@ -44,6 +45,7 @@ const subtitlesKOR = {
   barrier: "도로용 장애물이다. <br>왜 여기있는지는 모르겠다.",
 };
 
+// english subtitles
 const subtitlesENG = {
   storyStart: `"In November 23th, Today's content is deserted house experience!"<br><br>I am BJ, an Internet broadcasting company.<br><br> Last week while I was climbing the mountain in the back of my workout, I took the wrong road and found a house.<br><br>So, I was curious about that and decided to go as contents.<br><br>"I arrive at a deserted house deep in the △△ mountains!"<br><br>"I don't know if it's because of the mood, but I think someone is here."<br><br> Although the viewers told me not to talk nonsense, but I felt like someone was really watching me.<br><br>"Then, let's go into.."<br><br>"Bam!"<br><br>Someone hits my head...<br><br>I When I opened my eyes, I found myself lying in the haunted house.<br><br><span class="tip">(Please click to start the game.)</span>`,
   storyEnd: `<span class="highlight">GAME CLEAR</span><br><br>When I escaped from the room, a police car arrived just in time. <br><br>The police asked me about my condition and explained the whole story. <br><br>"A viewer who was watching your broadcast reported that you had been terrorized to our police station. <br><br>We came here after receiving the report. <br><br>The criminal couldn't have gotten away with it, so he'll catch it soon. <br><br>Go to the hospital first by ambulance." <br><br>I was lucky to be on the air and was treated at the hospital. <br><br>After five days... When I turned on the TV, the broadcast news related to me was coming out. <br><br>It was an news that said the criminal who terrorized me was caught. <br><br>I'm appalled to think back to then...`,
@@ -86,6 +88,7 @@ const subtitlesENG = {
   barrier: "It's a roadblock. <br>I don't know why It's here.",
 };
 
+// get subtitles from name
 function getSubtitle(name) {
   if (setting.korean) {
     if (name in subtitlesKOR) return subtitlesKOR[name];

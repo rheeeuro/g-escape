@@ -1,5 +1,6 @@
 import { player, setting } from "./settings.js";
 
+// hidden event (cupboard move)
 let hiddenEvent = {
   t: 0,
   dt: 0.02,
@@ -8,6 +9,7 @@ let hiddenEvent = {
   start: false,
 };
 
+// show popup (normal, vr)
 function showPopup() {
   document.querySelector("body").removeEventListener("click", showPopup);
   if (setting.vr) {
@@ -29,6 +31,7 @@ function showPopup() {
   document.querySelector("body").addEventListener("click", hidePopup);
 }
 
+// hide popup
 function hidePopup() {
   document.querySelector("body").removeEventListener("click", hidePopup);
   document.getElementById("jsPopup").style.display = "none";
@@ -39,6 +42,7 @@ function hidePopup() {
   document.getElementById("jsPopupTextVR2").style.display = "none";
 }
 
+// kew interface (wasd)
 const onKeyDown = function (event) {
   switch (event.keyCode) {
     case 38: // up
@@ -63,6 +67,7 @@ const onKeyDown = function (event) {
   }
 };
 
+// kew interface (wasd)
 const onKeyUp = function (event) {
   switch (event.keyCode) {
     case 38: // up
