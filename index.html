@@ -554,6 +554,7 @@
       }
 
       function animate() {
+        // game clear
         if (player.doorOpen && camera.position.x > 333) {
           storyEndText.innerHTML = getSubtitle("storyEnd");
           storyEnd.style.display = "block";
@@ -562,12 +563,14 @@
           return;
         }
 
+        // set vr status
         if (vrButton.innerHTML == "ENTER VR") {
           setting.vr = false;
         } else {
           setting.vr = true;
         }
 
+        // loading
         if (RESOURCES_LOADED == false) {
           loadingScreen.box.position.x -= 0.05;
           if (loadingScreen.box.position.x < -10)
@@ -587,6 +590,7 @@
         const previousPosition = camera.position.clone();
 
         if (controls.isLocked === true || setting.vr == true) {
+          // cupboard event
           if (hiddenEvent.start) {
             const newX = lerp(
               hiddenEvent.startX,
@@ -673,11 +677,13 @@
         checkIntersection();
         fixPosition(camera);
 
+        // handle spotlight
         if (setting.spotlight) {
           spotLight.target.position.set(0, 0, -1);
           spotLight.position.copy(camera.position);
         }
 
+        // rendering
         if (!setting.vr) {
           renderer.render(scene, camera);
           composer.render();
@@ -687,28 +693,24 @@
       }
 
       function eventTrigger() {
-        console.log(
-          "click: " +
-            eventObj.name +
-            ", index: " +
-            eventObj.parent.children.indexOf(eventObj)
-        );
+        //console.log("click: " + eventObj.name + ", index: " + eventObj.parent.children.indexOf(eventObj));
         if (
           eventObj.name == "woodenCabinet" &&
           eventObj != meshes["woodenCabinet"].children[4]
         ) {
           if (eventObj.position.z == 30) {
-            eventObj.position.z = 0;
+            eventObj.position.z = 0; // close cabinet (with key)
             if (eventObj == meshes["woodenCabinet"].children[2])
               meshes["key"].position.z = -206;
             return;
           } else {
             popupText.innerHTML = getSubtitle("openWoodenCabinet");
-            eventObj.position.z = 30;
+            eventObj.position.z = 30; // open cabinet (with key)
             if (eventObj == meshes["woodenCabinet"].children[2])
               meshes["key"].position.z = -176;
           }
         } else if (eventObj.name == "key") {
+          // get key
           if (player.hasKey) {
             return;
           } else {
@@ -717,6 +719,7 @@
           }
         } else if (eventObj.name == "door") {
           if (player.hasKey) {
+            // door open
             popupText.innerHTML = getSubtitle("doorOpen");
             meshes["door"].position.set(293, -77, -110);
             meshes["door"].rotation.set(0, Math.PI / 6, 0);
@@ -725,6 +728,7 @@
             player.seeDoor = true;
           }
         } else if (eventObj.name == "metaldoor" && player.seeDoor) {
+          // open and close metal door
           popupText.innerHTML = getSubtitle("metaldoorTwo");
           if (meshes["metaldoor"].children[1].rotation.y == -4) {
             if (eventObj != meshes["metaldoor"].children[1]) {
@@ -744,6 +748,7 @@
             return;
           }
         } else if (eventObj.name == "book") {
+          // set book's subtitle
           if (player.seeCupboard) {
             player.readDiary = true;
             popupText.innerHTML = getSubtitle("diary");
@@ -751,6 +756,7 @@
             player.seeDiary = true;
           }
         } else if (eventObj.name == "cupboard") {
+          // set cupboard event handler
           if (player.readDiary) {
             hiddenEvent.start = true;
             player.moveCupboard = true;
@@ -760,6 +766,7 @@
             popupText.innerHTML = getSubtitle("seeCupboard");
           }
         } else if (eventObj == meshes["corpse"].children[0]) {
+          // corpse wire subtitle
           popupText.innerHTML = getSubtitle("corpseWire");
         }
         showPopup();
