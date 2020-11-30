@@ -1,4 +1,4 @@
-# G-ESCAPE | VR room escape game with Three.js, Webgl, WebXR  
+# G-ESCAPE | VR room escape game
 ### 2020 컴퓨터 그래픽스 프로젝트
    
    
