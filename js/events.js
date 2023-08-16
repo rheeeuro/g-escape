@@ -12,21 +12,21 @@ let hiddenEvent = {
 // show popup (normal, vr)
 function showPopup() {
   document.querySelector("body").removeEventListener("click", showPopup);
-  if (setting.vr) {
-    document.getElementById(
-      "jsPopupTextVR1"
-    ).innerHTML = document.getElementById("jsPopupText").innerHTML;
-    document.getElementById(
-      "jsPopupTextVR2"
-    ).innerHTML = document.getElementById("jsPopupText").innerHTML;
-    document.getElementById("jsPopupVR1").style.display = "block";
-    document.getElementById("jsPopupTextVR1").style.display = "block";
-    document.getElementById("jsPopupVR2").style.display = "block";
-    document.getElementById("jsPopupTextVR2").style.display = "block";
-  } else {
+  //if (setting.vr) {
+  //  document.getElementById(
+  //    "jsPopupTextVR1"
+  //  ).innerHTML = document.getElementById("jsPopupText").innerHTML;
+  //  document.getElementById(
+  //    "jsPopupTextVR2"
+  //  ).innerHTML = document.getElementById("jsPopupText").innerHTML;
+  //  document.getElementById("jsPopupVR1").style.display = "block";
+  //  document.getElementById("jsPopupTextVR1").style.display = "block";
+  //  document.getElementById("jsPopupVR2").style.display = "block";
+  //  document.getElementById("jsPopupTextVR2").style.display = "block";
+  //} else {
     document.getElementById("jsPopup").style.display = "block";
     document.getElementById("jsPopupText").style.display = "block";
-  }
+  //}
 
   document.querySelector("body").addEventListener("click", hidePopup);
 }
